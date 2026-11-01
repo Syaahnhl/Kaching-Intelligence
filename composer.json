@@ -1,0 +1,30 @@
+{
+    "name": "kaching/intelligence",
+    "description": "Kaching POS Autonomous Intelligence Engine, Copilot & Forecasting Package",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Kaching Engineering",
+            "email": "dev@kaching.id"
+        }
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kaching\\Intelligence\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kaching\\Intelligence\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
