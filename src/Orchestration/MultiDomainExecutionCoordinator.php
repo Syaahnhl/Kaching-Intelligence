@@ -245,14 +245,21 @@ class MultiDomainExecutionCoordinator implements MultiDomainExecutionCoordinator
 
         $res = $this->cashFlowEngine->forecast($context);
 
+        $confidence = match ($res->dataQualityState ?? '') {
+            'SUFFICIENT' => 0.95,
+            'MODERATE_HISTORY' => 0.75,
+            'SPARSE_DATA' => 0.40,
+            default => 0.50,
+        };
+
         return new DomainExecutionResultDTO(
             domain: 'cash_flow',
             status: 'SUCCESS',
             data: $res->toArray(),
-            confidence: $res->confidenceScore,
-            strategy: $res->methodology,
+            confidence: $confidence,
+            strategy: $res->model,
             provenance: ['horizon_days' => $context->horizonDays],
-            warnings: $res->warnings
+            warnings: !empty($res->recommendations) ? $res->recommendations : []
         );
     }
 
